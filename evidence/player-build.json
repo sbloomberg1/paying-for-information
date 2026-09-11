@@ -1,0 +1,43 @@
+{
+  "buildx.build.provenance": {
+    "builder": {
+      "id": ""
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/python@3.12-slim?digest=sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea\u0026platform=linux%2Famd64",
+        "digest": {
+          "sha256": "78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "entryPoint": "Dockerfile"
+      },
+      "parameters": {
+        "frontend": "dockerfile.v0",
+        "locals": [
+          {
+            "name": "context"
+          },
+          {
+            "name": "dockerfile"
+          }
+        ]
+      },
+      "environment": {
+        "platform": "linux/arm64"
+      }
+    }
+  },
+  "buildx.build.ref": "desktop-linux/desktop-linux/k6elwcqy7eq36v0n67q8ep5ne",
+  "containerimage.descriptor": {
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "digest": "sha256:e10497892a014aad6899927f9a437361f3517691502379910b72b5a9cb5e7429",
+    "size": 856
+  },
+  "containerimage.digest": "sha256:e10497892a014aad6899927f9a437361f3517691502379910b72b5a9cb5e7429",
+  "image.name": "docker.io/library/pfi-player:dev"
+}

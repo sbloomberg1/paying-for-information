@@ -1,8 +1,6 @@
 __pycache__/
-*.py[cod]
-*.egg-info/
+.pytest_cache/
 .venv/
-venv/
-.DS_Store
-/data/
-/out/
+evidence/*/history/
+evidence/adversarial/*/history/
+release/

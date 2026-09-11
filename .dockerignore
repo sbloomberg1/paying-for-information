@@ -1,0 +1,11 @@
+.git
+evidence
+tests
+adversarial
+benchmarks
+scripts
+__pycache__
+*.md
+.venv
+**/__pycache__
+**/*.pyc

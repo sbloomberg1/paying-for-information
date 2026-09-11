@@ -1,123 +1,70 @@
-# hello_world — the worked example Apex competition
+# Paying for Information
 
-The minimal end-to-end [Apex](https://macrocosmos.ai) competition: a complete, buildable
-`apex.competition.v1` competition in as few moving parts as possible. **Fork this repo as the
-starting point for your own competition.**
+Research candidate 0.1.0. Local implementation and evidence are available; this is not an activated Apex competition. See `HANDOFF.md` for the admission status.
 
-The task is deliberately trivial — sort a list of numbers — so that nothing distracts from the
-*structure*: a spec, a player image, a referee image, and a release workflow that signs both.
+Decide when an observation is worth buying, how precise it should be, and how to quote after seeing it. You compete for flow against a fixed maker that adapts to public news and its inventory.
 
-- **Submission format:** `code` — a `submission.py` exposing `sort_numbers(numbers)`.
-- **Score:** `raw_score` = fraction of tasks sorted correctly, **higher is better**.
-- **Baseline:** `player/submission.py` (a one-line `sorted()`), which scores 1.0.
+## The market
 
-> This is a teaching example, not a live competition. The image digests in `spec.yaml` are
-> placeholder zeros and it is not registered on the platform.
+There is one binary claim. Quotes and balances use integer ticks: 10,000 ticks equal one currency unit. Each account starts with 100 currency units, no position, a position limit of ±20 claims, and at most four claims quoted on each side. Both terminal outcomes must remain fully collateralized. A fill that would exceed account limits is unavailable. Quotes expire every tick.
 
-## What's in here
+The hidden fair probability starts between 3,500 and 6,500 ticks and follows a bounded symmetric random walk. A step's magnitude is reduced symmetrically near a boundary, keeping the process a martingale. The usual step size varies by episode; 8% of steps are four times as large. Public news updates every fourth tick with uniform bounded noise. The episode publishes its usual volatility and public-noise bound.
 
-| Path | What it is |
-|------|-----------|
-| `spec.yaml` | The competition: kind, resources, submission contract, screening, entrypoints, images, cosign identity. |
-| `input.schema.json` | JSON Schema for the round input, `$ref`'d from the spec. |
-| `fixtures/input.json` | A round-input fixture to validate against the schema. |
-| `player/Dockerfile`, `player/launch.py` | The **player** image: serves the miner's submission over the gym_v1 HTTP API. |
-| `player/submission.py` | The reference (baseline) submission. Not baked into the image — the platform writes the miner's version to `/app/submission.py` at run time. |
-| `referee/Dockerfile`, `referee/referee.py` | The **referee** image: holds the ground truth, drives the player, writes `/data/result.json`. |
-| `player/gym_v1/`, `referee/gym_v1/` | **Vendored** copy of the toolkit's `gym_v1` package (see below). |
-| `.github/workflows/release.yml` | Builds, pushes by digest, and keyless-signs both images on a `v*` tag. |
+1. Receive public news, your account, prior fills and prior quotes.
+2. Choose one information tier for each episode.
+3. Pay the quoted fee and receive the purchased observation.
+4. Replace your bid and ask.
+5. Fair value moves; an informed taker trades first, followed by retail.
+6. Repeat for 24 ticks.
 
-## The vendored `gym_v1` — this is the pattern to copy
+This is a discrete quote-driven market. Makers only supply liquidity to external takers; they do not trade directly with one another. Informed takers know the current fair value and take stale quotes with at least five ticks of edge. Each episode has three to five retail orders per tick, each for one claim, with equally likely buy/sell direction and a reservation price 250–1,100 ticks above/below fair value. Retail trades only if an eligible quote meets that price. Better prices receive flow first; equal prices use priority rotating by tick and episode, balanced within each condition stratum. These simplified order-flow rules are part of the game.
 
-Both images **vendor** the toolkit's `gym_v1/` package into this repo and build on
-`FROM python:3.12-slim`:
+## Score
 
-```dockerfile
-FROM python:3.12-slim
-COPY player/gym_v1/ /app/gym_v1/     # <- the vendored gym_v1
-COPY player/launch.py /app/launch.py
+For a maker purchase at price `q`, fill edge is `fair_at_fill − q`; for a maker sale, it is `q − fair_at_fill`. Sum this edge over all fills, then subtract information fees. This is conditional expected trading surplus. It removes subsequent price-path and binary-settlement luck from ranking.
+
+The raw score is `max(0, total signed edge / (N × 10000))`. Apply the floor once, after summing every episode. Buying an observation subtracts its fee from edge and cash. Any unavailable or invalid player response forfeits the evaluation, for a raw score of zero.
+
+The report separately gives cash plus inventory valued at terminal fair probability, less initial capital. This terminal marked profit is a diagnostic, not the ranking score. No terminal Bernoulli draw is used. All balances, fees and edge are calculated in integer ticks before aggregation. Clock time affects request deadlines only.
+
+## Submission contract
+
+Submit a single Python file, at most 1 MiB, with `reset(config)` and `act(observation)`. The runtime provides Python 3.12 and its standard library. The example is `player/submission.py`. The server invokes `reset` once per evaluation. State can be maintained by episode ID and discarded after the last tick. Training takes place outside the evaluation.
+
+The gym_v1 observation has `phase` and `episodes`. The response is a list of exactly the same length, in the same order. An episode includes:
+
+| Fields | Meaning |
+|---|---|
+| `id`, `tick`, `remaining` | Episode identity and simulated time |
+| `public`, `public_age`, `public_noise`, `volatility` | Public observation, its age, its uniform error bound, usual process step |
+| `signal`, `tier`, `costs`, `signal_noise` | Purchased observation or null, its tier, current prices and noise bounds |
+| `cash`, `inventory`, `position_limit`, `max_size` | Account state and limits |
+| `fills` | Your prior tick's fills: side +1 for buying, −1 for selling, price, quantity |
+| `book` | Prior quotes and remaining quantities, by seat |
+
+For `phase="buy"`, return integers from 0 to 3. Tier 0 costs nothing and returns no observation. Tiers 1, 2 and 3 have uniform error bounds 300, 100 and 25 ticks. Their base fees are 20, 65 and 210 ticks, multiplied by the episode's published cost multiplier (1 or 6). A signal observes fair value before the subsequent market move. Only one observation is available per tick. The duel does not send buy-phase requests.
+
+For `phase="quote"`, return either null (sit out this tick) or an object such as:
+
+```json
+{"bid": 4700, "ask": 5300, "bid_size": 4, "ask_size": 4}
 ```
 
-```python
-from gym_v1.player import Player, serve                    # not apex_sdk.gym_v1
-from gym_v1.referee import Referee, GameResult, RefereeContext
-from gym_v1.client import PlayerClient, PlayerError
-```
+Prices and sizes must be integers. `0 ≤ bid < ask ≤ 10000`; each size is between 0 and 4. A zero size disables that side. Responses must use these four keys and no additional keys. Returning a valid null quote differs from a missing or malformed response. An unaffordable information purchase is an invalid action.
 
-**Do not build `FROM apex-player-base` / `apex-referee-base`.** Those base images ship the toolkit
-as `apex_sdk.gym_v1`, but they are not published to any registry — the build only resolves on a
-machine that has `docker build`-ed the base locally, so it **fails in release CI**. Build-FROM-base
-is the intended future once the bases are published; vendoring is what works today and what every
-shipped competition does.
+The proposed evaluation uses **32,768 episodes**, batches of up to **512**, and a **100 ms deadline for the entire batch response**. All episodes have 24 ticks. The platform-owned input can select a 256-episode smoke test; miners do not choose evaluation size. One CPU and 512 MiB are allocated per sandbox.
 
-The vendored files carry a provenance header naming the toolkit version they came from. Don't
-hand-edit them — to update, re-copy from
-[apex-competitions-builder](https://github.com/macrocosm-os/apex-competitions-builder) `src/apex_sdk/gym_v1/`
-and rewrite the `apex_sdk.gym_v1` import root to `gym_v1`:
+## Try it locally
 
 ```bash
-BUILDER=../apex-competitions-builder
-for side in player referee; do
-  for f in __init__ client player referee; do
-    sed 's/^from apex_sdk\.gym_v1\./from gym_v1./' "$BUILDER/src/apex_sdk/gym_v1/$f.py" > "$side/gym_v1/$f.py"
-  done
-done
+python3 -m pip install -r requirements-dev.txt
+python3 -m pytest -q
+docker build --platform linux/amd64 -f player/Dockerfile -t pfi-player:dev .
+docker build --platform linux/amd64 -f referee/Dockerfile -t pfi-referee:dev .
+python3 scripts/docker_match.py --submission player/submission.py --episodes 256 --output evidence/my-run
+python3 scripts/read_records.py evidence/my-run/history/episodes.jsonl.gz
 ```
 
-## Validate and run locally
+Choose a new output directory for each run. The local harness uses separate player containers, a referee container and internal networks. Its behavior supplements `apex-dev preflight`; the current toolkit’s `apex-dev run` prints a plan but does not execute the match. The replay reader checks each episode’s accounting and the aggregate score.
 
-```bash
-pip install apex-competition-sdk        # or: pip install -e ../apex-competitions-builder
-
-# 1. Validate the spec + input fixture against apex.competition.v1. No Docker.
-apex-dev preflight --spec ./spec.yaml --input fixtures/input.json
-
-# 2. Preview the resolved execution plan (player + referee images, protocol, resources).
-apex-dev run --spec ./spec.yaml --input fixtures/input.json \
-             --submission ./player/submission.py --dockerfile ./player/Dockerfile
-```
-
-`apex-dev run` prints the plan and exits 3: referee-driven local execution (both sandboxes on a
-shared network) is not implemented in the toolkit yet. Until it is, exercise the full loop by hand —
-which is also the honest test of the sandboxed leg, since it runs the player with egress blocked
-and the spec's resource limits:
-
-```bash
-# Build both images (build context = this repo root).
-docker build -f player/Dockerfile  -t hello-world-player  .
-docker build -f referee/Dockerfile -t hello-world-referee .
-
-docker network create hello-net
-
-# Player: submission mounted at target_path, no egress, spec resource limits.
-docker run -d --name hello-player --network hello-net \
-  --cpus 1 --memory 512m \
-  -v "$PWD/player/submission.py:/app/submission.py:ro" \
-  hello-world-player
-
-# Referee: the platform injects these env vars and reads /data/result.json.
-docker run --rm --network hello-net \
-  -e MATCH_ID=local -e SEED=0 -e NUM_PLAYERS=1 \
-  -e PLAYER_URLS='http://hello-player:8000' \
-  -e CONFIG_JSON="$(cat fixtures/input.json)" \
-  -v "$PWD/out:/data" \
-  hello-world-referee
-
-cat out/result.json     # -> {"raw_scores": [1.0], "winner": 0, "terminal_reason": "scored", ...}
-
-docker rm -f hello-player && docker network rm hello-net
-```
-
-## Ship it
-
-1. Tag a release (`git tag v0.1.0 && git push --tags`) — `release.yml` builds, pushes, and
-   keyless-signs both images.
-2. Copy the pushed digests from the Actions log into `spec.yaml` (`image.digest` and
-   `referee.image.digest`).
-3. Open a [Competition onboarding issue](https://github.com/macrocosm-os/apex-competitions-builder/issues/new?template=competition-onboarding.yml)
-   with your repo URL, released tag, image refs + digests, and a filled `HANDOFF.md`. A
-   Macrocosmos maintainer copies your `spec.yaml` into the private registry and activates it on
-   stage, then prod.
-
-Full authoring guide, the spec schema, and the design skill:
-[macrocosm-os/apex-competitions-builder](https://github.com/macrocosm-os/apex-competitions-builder).
+`input.schema.json` is generated from `referee/config.py` using Pydantic. The scoring containers have no pip dependencies. The vendored `gym_v1` is unchanged from the Apex hello-world template; see `PROVENANCE.json` for its source and the shared engine hash.

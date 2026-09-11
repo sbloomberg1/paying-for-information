@@ -1,0 +1,21 @@
+{
+  "candidate": "0.1.0",
+  "kind": "solo",
+  "episodes": 32768,
+  "master_seeds_measured": 20,
+  "reference_mean": 1.2808190336608887,
+  "reference_round_sd": 0.0026680405588655103,
+  "solo_quarter_takeover_margin": 0.003202047584152222,
+  "solo_variance_rule_pass": true,
+  "container_seconds": 84.0765,
+  "full_loop_seconds": 84.914,
+  "records_bytes": 83902348,
+  "replay_episodes_verified": 32768,
+  "container_reference_scores": [
+    1.2801844177246093
+  ],
+  "tests": "26 passed",
+  "published": false,
+  "stage_approved": false,
+  "release_ready": false
+}

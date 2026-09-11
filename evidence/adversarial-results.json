@@ -1,0 +1,92 @@
+[
+  {
+    "submission": "constant.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "completed",
+    "seconds": 0.6353
+  },
+  {
+    "submission": "empty.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.1288
+  },
+  {
+    "submission": "exception.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.1324
+  },
+  {
+    "submission": "late_failure.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.5898
+  },
+  {
+    "submission": "nan.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.1218
+  },
+  {
+    "submission": "no_trade.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "completed",
+    "seconds": 0.4671
+  },
+  {
+    "submission": "oversized.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.1268
+  },
+  {
+    "submission": "random.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "completed",
+    "seconds": 0.6545
+  },
+  {
+    "submission": "timeout.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.237
+  },
+  {
+    "submission": "zero.py",
+    "scores": [
+      0.0
+    ],
+    "winner": -1,
+    "terminal_reason": "forfeit",
+    "seconds": 0.127
+  }
+]

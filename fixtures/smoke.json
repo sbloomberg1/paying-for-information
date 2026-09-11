@@ -1,0 +1,5 @@
+{
+  "episodes": 256,
+  "batch_size": 512,
+  "deadline_ms": 100
+}

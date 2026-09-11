@@ -1,49 +1,56 @@
-# RELEASE WORKFLOW — builds, keyless-signs (cosign/OIDC), and pushes the hello_world
-# player + referee images.
-#
-# The spec's `signature.cosign_identity` points at THIS file's path, so keep the path
-# `.github/workflows/release.yml` and the repo name stable — changing either breaks the
-# platform's signature verification at sync time.
-#
-# The images vendor `gym_v1` (`player/gym_v1/`, `referee/gym_v1/`) and build FROM
-# python:3.12-slim, so this workflow is self-contained — no base image or PyPI dependency.
-# It is unverified in CI; run it on a tag once and confirm the Actions log before relying
-# on it. REMAINING TODO after the first successful run: copy the pushed image digests into
-# spec.yaml (`image.digest` and `referee.image.digest`), which are placeholder zeros today.
 name: release
-
 on:
   push:
-    tags: ["v*"]
-
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
 permissions:
   contents: read
   packages: write
-  id-token: write            # required for keyless cosign signing
-
+  id-token: write
 jobs:
-  images:
+  release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - { name: player,  dockerfile: player/Dockerfile }
-          - { name: referee, dockerfile: referee/Dockerfile }
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/login-action@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Validate the candidate
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install -r requirements-dev.txt
+          .venv/bin/python -m pytest -q
+          git clone --filter=blob:none https://github.com/macrocosm-os/apex-competitions-builder ../apex-builder
+          git -C ../apex-builder checkout 5a0be85a5975f0948a2d4878597a820c636656e2
+          PYTHONPATH=../apex-builder/src .venv/bin/python -m apex_sdk.dev.cli preflight --spec spec.yaml --input fixtures/input.json
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: sigstore/cosign-installer@v3
-      - name: Build and push
-        id: build
+      - uses: sigstore/cosign-installer@f713795cb21599bc4e5c4b58cbad1da852d7eeb9
+        with:
+          cosign-release: v3.0.2
+      - name: Build, push, sign, and verify
+        shell: bash
         run: |
-          IMAGE=ghcr.io/macrocosm-os/apex-competition-hello-world-${{ matrix.name }}
-          docker build -f ${{ matrix.dockerfile }} -t "$IMAGE:${{ github.ref_name }}" .
-          docker push "$IMAGE:${{ github.ref_name }}"
-          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "$IMAGE:${{ github.ref_name }}")
-          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
-      - name: Sign (keyless)
-        run: cosign sign --yes "${{ steps.build.outputs.digest }}"
+          set -euo pipefail
+          mkdir -p release
+          REPOSITORY=${GITHUB_REPOSITORY,,}
+          for SIDE in player referee; do
+            IMAGE="ghcr.io/${REPOSITORY}-${SIDE}"
+            docker build --platform linux/amd64 --label "org.opencontainers.image.source=https://github.com/$GITHUB_REPOSITORY" --push --metadata-file "release/${SIDE}.json" -f "${SIDE}/Dockerfile" -t "${IMAGE}:${GITHUB_REF_NAME}" .
+            DIGEST=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["containerimage.digest"])' "release/${SIDE}.json")
+            cosign sign --yes "${IMAGE}@${DIGEST}"
+            cosign verify --certificate-identity "https://github.com/$GITHUB_WORKFLOW_REF" --certificate-oidc-issuer https://token.actions.githubusercontent.com "${IMAGE}@${DIGEST}" > "release/${SIDE}-verification.json"
+          done
+          PLAYER_DIGEST=$(python3 -c 'import json; print(json.load(open("release/player.json"))["containerimage.digest"])')
+          REFEREE_DIGEST=$(python3 -c 'import json; print(json.load(open("release/referee.json"))["containerimage.digest"])')
+          PLAYER_IMAGE="ghcr.io/${REPOSITORY}-player@${PLAYER_DIGEST}"
+          REFEREE_IMAGE="ghcr.io/${REPOSITORY}-referee@${REFEREE_DIGEST}"
+          docker pull "$PLAYER_IMAGE"
+          docker pull "$REFEREE_IMAGE"
+          python3 scripts/docker_match.py --player-image "${PLAYER_IMAGE}" --referee-image "${REFEREE_IMAGE}" --submission player/submission.py --episodes 32768 --output release/container-run
+          python3 scripts/read_records.py release/container-run/history/episodes.jsonl.gz > release/record-verification.json
+          python3 -c 'import json; r=json.load(open("release/container-run/result.json")); assert r["terminal_reason"] == "completed" and r["raw_scores"][0] > 0'
+          python3 scripts/finalize_spec.py --repository "$REPOSITORY" --tag "$GITHUB_REF_NAME" --identity "https://github.com/$GITHUB_WORKFLOW_REF" --player release/player.json --referee release/referee.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: signed-release-spec
+          path: release/

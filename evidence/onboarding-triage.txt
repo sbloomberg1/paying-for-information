@@ -1,0 +1,3 @@
+⚠ light screen found potential onboarding blockers:
+  [error] placeholder_digest: player image digest is missing, invalid, or all zeros
+  [error] placeholder_digest: referee image digest is missing, invalid, or all zeros

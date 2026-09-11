@@ -1,0 +1,513 @@
+{
+  "episodes": 256,
+  "modes": [
+    "adaptive",
+    "never",
+    "periodic",
+    "always",
+    "overfit"
+  ],
+  "stress": false,
+  "rows": [
+    {
+      "sample": 0,
+      "policy": "adaptive",
+      "raw_scores": [
+        1.28868984375
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          1.28868984375
+        ],
+        "terminal_profit": [
+          1.283073046875
+        ],
+        "information_spent": [
+          0.1295859375
+        ],
+        "volume": [
+          17001
+        ],
+        "purchases": [
+          [
+            2340,
+            1536,
+            2268,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.384778125,
+            1.242990625,
+            1.531215625,
+            1.559275,
+            1.082459375,
+            0.70968125,
+            1.56856875,
+            1.23055
+          ]
+        ],
+        "elapsed_s": 0.081
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "never",
+      "raw_scores": [
+        0.842391796875
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.842391796875
+        ],
+        "terminal_profit": [
+          0.848792578125
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          10534
+        ],
+        "purchases": [
+          [
+            6144,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.238309375,
+            0.314175,
+            1.474771875,
+            0.33164375,
+            1.082459375,
+            0.39859375,
+            1.4225375,
+            0.47664375
+          ]
+        ],
+        "elapsed_s": 0.0737
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "periodic",
+      "raw_scores": [
+        1.034428125
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          1.034428125
+        ],
+        "terminal_profit": [
+          1.02801328125
+        ],
+        "information_spent": [
+          0.1365
+        ],
+        "volume": [
+          16660
+        ],
+        "purchases": [
+          [
+            4608,
+            0,
+            1536,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.31063125,
+            0.760440625,
+            1.238590625,
+            1.218734375,
+            0.957475,
+            0.602871875,
+            1.050740625,
+            1.135940625
+          ]
+        ],
+        "elapsed_s": 0.0752
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -0.199116015625
+        ],
+        "terminal_profit": [
+          -0.20508671875
+        ],
+        "information_spent": [
+          1.764
+        ],
+        "volume": [
+          19810
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            6144
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.2143375,
+            0.8633625,
+            1.114946875,
+            1.075584375,
+            -1.425221875,
+            -1.5534875,
+            -1.430928125,
+            -1.451521875
+          ]
+        ],
+        "elapsed_s": 0.0756
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "overfit",
+      "raw_scores": [
+        0.29270234375
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.29270234375
+        ],
+        "terminal_profit": [
+          0.294673828125
+        ],
+        "information_spent": [
+          0.882
+        ],
+        "volume": [
+          16480
+        ],
+        "purchases": [
+          [
+            3072,
+            0,
+            0,
+            3072
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.238309375,
+            0.314175,
+            1.114946875,
+            1.075584375,
+            1.082459375,
+            0.39859375,
+            -1.430928125,
+            -1.451521875
+          ]
+        ],
+        "elapsed_s": 0.0754
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "adaptive",
+      "raw_scores": [
+        1.327684375
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          1.327684375
+        ],
+        "terminal_profit": [
+          1.31948203125
+        ],
+        "information_spent": [
+          0.129890625
+        ],
+        "volume": [
+          17503
+        ],
+        "purchases": [
+          [
+            2328,
+            1536,
+            2280,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.3095125,
+            1.479065625,
+            1.62761875,
+            1.4933125,
+            1.164290625,
+            0.679228125,
+            1.646290625,
+            1.22215625
+          ]
+        ],
+        "elapsed_s": 0.0822
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "never",
+      "raw_scores": [
+        0.85104375
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.85104375
+        ],
+        "terminal_profit": [
+          0.88675390625
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          10947
+        ],
+        "purchases": [
+          [
+            6144,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.09911875,
+            0.422903125,
+            1.455309375,
+            0.389075,
+            1.164290625,
+            0.376278125,
+            1.510090625,
+            0.391284375
+          ]
+        ],
+        "elapsed_s": 0.0746
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "periodic",
+      "raw_scores": [
+        1.069308203125
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          1.069308203125
+        ],
+        "terminal_profit": [
+          1.062017578125
+        ],
+        "information_spent": [
+          0.1365
+        ],
+        "volume": [
+          17040
+        ],
+        "purchases": [
+          [
+            4608,
+            0,
+            1536,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.2861,
+            0.880396875,
+            1.2923625,
+            1.23805625,
+            1.160565625,
+            0.545965625,
+            1.1899125,
+            0.96110625
+          ]
+        ],
+        "elapsed_s": 0.0769
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -0.15986953125
+        ],
+        "terminal_profit": [
+          -0.169223828125
+        ],
+        "information_spent": [
+          1.764
+        ],
+        "volume": [
+          20469
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            6144
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.160246875,
+            1.11418125,
+            1.141453125,
+            1.058340625,
+            -1.268053125,
+            -1.582725,
+            -1.35191875,
+            -1.55048125
+          ]
+        ],
+        "elapsed_s": 0.0767
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "overfit",
+      "raw_scores": [
+        0.294998046875
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 6144,
+      "metadata": {
+        "episodes": 256,
+        "completed_episodes": 256,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.294998046875
+        ],
+        "terminal_profit": [
+          0.31317109375
+        ],
+        "information_spent": [
+          0.882
+        ],
+        "volume": [
+          16843
+        ],
+        "purchases": [
+          [
+            3072,
+            0,
+            0,
+            3072
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.09911875,
+            0.422903125,
+            1.141453125,
+            1.058340625,
+            1.164290625,
+            0.376278125,
+            -1.35191875,
+            -1.55048125
+          ]
+        ],
+        "elapsed_s": 0.0765
+      }
+    }
+  ]
+}

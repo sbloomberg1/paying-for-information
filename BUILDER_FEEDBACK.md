@@ -1,0 +1,27 @@
+# Feedback from building two market competitions
+
+Tested the builder at commit `5a0be85a5975f0948a2d4878597a820c636656e2` (SDK 0.3.0), using the hello-world repository at `9b2ff70df3b539497ad5f4d661793464dd7351b6` and reviewing Apex at `33d21114001eac01e03c6886735805884c6835d8`.
+
+The skill's strongest contribution was forcing an empirical design review. Our first Paying for Information evaluation failed its variance target. Increasing the batch/evaluation size made the measured target pass without inventing a score offset. The success statement, matched-policy ablations, adversarial fixtures and per-task records also caught real issues. Both competitions now run in isolated containers with reproducible accounting.
+
+These are the points we would ask the Apex team to clarify or improve:
+
+1. **The required local runner is still a plan printer.** The onboarding form asks for `apex-dev run`, while the pinned CLI explicitly says the execution backend is not implemented and exits 3. We supplied a separate Docker harness with resource limits, isolated networks and real results. An executable reference runner would remove substantial duplicated work. [CLI implementation](https://github.com/macrocosm-os/apex-competitions-builder/blob/5a0be85a5975f0948a2d4878597a820c636656e2/src/apex_sdk/dev/cli.py#L245).
+
+2. **Positive baseline versus baseline-copy eligibility needs one consistent rule.** The handoff asks for a positive published baseline, a normally zero declared floor, and a baseline copy that cannot take or hold the lead. A copy can become the first leader against zero. Specify whether Apex seeds an incumbent, excludes the reference, or expects another explicit initial qualification rule. We have not hidden an extra scoring floor to make the checklist appear satisfied. [Handoff template](https://github.com/macrocosm-os/apex-competitions-builder/blob/5a0be85a5975f0948a2d4878597a820c636656e2/skills/apex-competition-builder/HANDOFF.md).
+
+3. **Financial scores need explicit signed-score and failure examples.** Losses must survive aggregation; clipping each episode to zero would reward variance and discard bad trades. In a duel, zero for a failed player can outrank an honest negative result. Our solo floors only the aggregate; our duel excludes forfeits from winning and assigns a bounded negative sentinel. The guide should distinguish solo floors, signed duels and lower-is-better metrics.
+
+4. **Four-player tournament semantics are underspecified.** The schema permits four players, but creators need an executable contract for advancement, game aggregation, all-invalid fields, draws, signed scores, close results and tiebreak metadata. Our identical-policy audit produces different scores because fill allocation changes inventories. Strong-field wins are stable, but a three-game bracket has not been shown to resolve equivalent-policy noise or related-entry effects. Combat-specific tiebreak fields should not be invented for a market game.
+
+5. **The bundled HTTP client is too permissive for the stated timeout/security budget.** It reads entire responses, lets JSON parse failures escape the PlayerError abstraction, and defaults to `deadline_ms/1000 + 1` seconds. A socket inactivity timeout also does not bound a trickling response's total duration. We added a bounded UTF-8/JSON transport with total deadlines and action validation while leaving vendored gym_v1 unchanged. [Client implementation](https://github.com/macrocosm-os/apex-competitions-builder/blob/5a0be85a5975f0948a2d4878597a820c636656e2/src/apex_sdk/gym_v1/client.py#L47).
+
+6. **“No diagnostics correlate with ground truth” conflicts with reconstructible records.** A record explaining a completed task's score necessarily reveals something about that task's truth. Distinguish permitted post-evaluation disclosure from live or future leakage. Our records expose completed-task fair values but contain no RNG seeds or future task state; they must not be streamed during evaluation. Clarify `history/` collection, compression and quotas: the full primary run produces about 84 MB compressed.
+
+7. **State the seed and network contract explicitly.** Creators need to know that the master seed is private to the referee, has enough unpredictable entropy, and cannot be inferred from player/job metadata. Hashing does not repair a weak seed. A network described as “per-job” also needs a clear egress and peer-isolation policy. Our local harness gives each player a separate internal network connected only to the referee.
+
+8. **Publish a complete release example.** The example's placeholder digests and manual copy-back step leave a gap between a successful image build and the deployable spec. We prepared a workflow that builds by a pinned base, pushes, signs and verifies the images, runs the actual released images, and emits a spec containing their real digests and exact signing identity. That final spec can travel as a release artifact without pretending the release-source placeholder spec is deployable.
+
+For evaluation guidance, also distinguish absolute round-score variance from paired challenger/incumbent uncertainty and clarify whether the incumbent is rescored on each round's current conditions. Our primary meets the stated sample-SD threshold, but fresh-seed and close-challenger testing still belongs in stage qualification.
+
+This feedback accompanies working code and evidence. It is not an independent security audit or a request to bypass Apex's admission review.

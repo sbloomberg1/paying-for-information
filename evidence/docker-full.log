@@ -1,0 +1,64 @@
+{
+  "local_only": true,
+  "architecture": "linux/amd64",
+  "cpu_limit": 1,
+  "memory_bytes": 536870912,
+  "player_count": 1,
+  "referee_only_internal_networks": true,
+  "wall_seconds": 84.914,
+  "player_image": "sha256:e10497892a014aad6899927f9a437361f3517691502379910b72b5a9cb5e7429",
+  "referee_image": "sha256:a299a1c0425dc6597aae8d8d27346c4a0cc59eeb3f144a88378593ffea23c6a3",
+  "config": {
+    "episodes": 32768,
+    "batch_size": 512,
+    "deadline_ms": 100
+  },
+  "result": {
+    "raw_scores": [
+      1.2801844177246093
+    ],
+    "winner": 0,
+    "terminal_reason": "completed",
+    "steps": 786432,
+    "metadata": {
+      "episodes": 32768,
+      "completed_episodes": 32768,
+      "active": [
+        true
+      ],
+      "signed_edge": [
+        1.2801844177246093
+      ],
+      "terminal_profit": [
+        1.2819610412597657
+      ],
+      "information_spent": [
+        0.12941574096679687
+      ],
+      "volume": [
+        2182274
+      ],
+      "purchases": [
+        [
+          300378,
+          196608,
+          289446,
+          0
+        ]
+      ],
+      "stratum_edge": [
+        [
+          1.3132419189453124,
+          1.150051513671875,
+          1.5648560791015624,
+          1.531511328125,
+          1.1112413818359375,
+          0.661497998046875,
+          1.5983873779296875,
+          1.310687744140625
+        ]
+      ],
+      "elapsed_s": 84.0765
+    }
+  }
+}

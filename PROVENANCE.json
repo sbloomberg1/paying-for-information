@@ -1,0 +1,34 @@
+{
+  "template_repository": "https://github.com/macrocosm-os/apex-competition-hello-world",
+  "template_commit": "9b2ff70df3b539497ad5f4d661793464dd7351b6",
+  "builder_repository": "https://github.com/macrocosm-os/apex-competitions-builder",
+  "builder_commit": "5a0be85a5975f0948a2d4878597a820c636656e2",
+  "builder_version": "0.3.0",
+  "apex_repository_commit_reviewed": "33d21114001eac01e03c6886735805884c6835d8",
+  "engine_version": "0.1.0",
+  "base_image": "python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea",
+  "architecture": "linux/amd64",
+  "runtime_dependencies": "Python standard library only",
+  "model_revision": null,
+  "dataset_hash": null,
+  "source_sha256": {
+    "player/gym_v1/__init__.py": "dc3c47c3ee66447829046fb2af798c8179bdd515a05904daa8f8d8484e675be9",
+    "player/gym_v1/client.py": "c4081773bd6322822c6d24f545e9f181324dd9f4c08ff99596f4143d6113a468",
+    "player/gym_v1/player.py": "27bdd2d219723891d1e60a7c3166decbb7ffa5ba0af0a804e30cd40f7d4ac463",
+    "player/gym_v1/referee.py": "9d1ffb7b82696a11cefb06d160454470f6f36d1e39bdbdff83f5ff1d8f5fb913",
+    "player/launch.py": "ab2c78d694f7c8d8cb22c034bb143f724335da82098f704854c1d7080d3b4a32",
+    "player/submission.py": "08930c2f4123a003c7fed642f70a4c04998e413d2a18e3a11dbb996d01bf4e68",
+    "referee/config.py": "818f313bc5c7070321f3cd26b4b2cae590d08f0aa2d99b43962a0779f18fc204",
+    "referee/gym_v1/__init__.py": "dc3c47c3ee66447829046fb2af798c8179bdd515a05904daa8f8d8484e675be9",
+    "referee/gym_v1/client.py": "c4081773bd6322822c6d24f545e9f181324dd9f4c08ff99596f4143d6113a468",
+    "referee/gym_v1/player.py": "27bdd2d219723891d1e60a7c3166decbb7ffa5ba0af0a804e30cd40f7d4ac463",
+    "referee/gym_v1/referee.py": "9d1ffb7b82696a11cefb06d160454470f6f36d1e39bdbdff83f5ff1d8f5fb913",
+    "referee/market.py": "dfe918c892bf251b038a2d68926fde24d913c843583cf3c47e7787bb013377e8",
+    "referee/referee.py": "8033fe0cf09561b6ac3eb41bc869a45b4e798c8acff538516394096925c07eeb",
+    "referee/transport.py": "07448da1d721b6164381ee54c4466ba63a913deee6b37b9d16676253ea039adb"
+  },
+  "local_build_metadata": [
+    "evidence/player-build.json",
+    "evidence/referee-build.json"
+  ]
+}

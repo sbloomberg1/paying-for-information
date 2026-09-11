@@ -1,0 +1,1012 @@
+{
+  "episodes": 8192,
+  "modes": [
+    "adaptive",
+    "never",
+    "periodic",
+    "always"
+  ],
+  "stress": true,
+  "rows": [
+    {
+      "sample": 0,
+      "policy": "adaptive",
+      "raw_scores": [
+        0.8765296142578125
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.8765296142578125
+        ],
+        "terminal_profit": [
+          0.8722335815429687
+        ],
+        "information_spent": [
+          0.297
+        ],
+        "volume": [
+          494147
+        ],
+        "purchases": [
+          [
+            61440,
+            61440,
+            73728,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.356955859375,
+            0.38410146484375,
+            1.579933984375,
+            0.58596162109375,
+            1.131023828125,
+            0.11149765625,
+            1.56785458984375,
+            0.29490791015625
+          ]
+        ],
+        "elapsed_s": 3.0773
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "never",
+      "raw_scores": [
+        0.2177731201171875
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.2177731201171875
+        ],
+        "terminal_profit": [
+          0.20999276123046876
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          232683
+        ],
+        "purchases": [
+          [
+            196608,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.04254892578125,
+            -0.136616796875,
+            0.2364337890625,
+            -0.27064013671875,
+            0.99070078125,
+            -0.13486279296875,
+            0.24678779296875,
+            -0.2321666015625
+          ]
+        ],
+        "elapsed_s": 2.7975
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "periodic",
+      "raw_scores": [
+        0.5618725219726562
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.5618725219726562
+        ],
+        "terminal_profit": [
+          0.5613058837890625
+        ],
+        "information_spent": [
+          0.273
+        ],
+        "volume": [
+          456619
+        ],
+        "purchases": [
+          [
+            147456,
+            0,
+            49152,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.304443359375,
+            -0.05066767578125,
+            1.4587796875,
+            0.3284923828125,
+            0.8572470703125,
+            -0.42636318359375,
+            1.047291015625,
+            -0.02424248046875
+          ]
+        ],
+        "elapsed_s": 2.9848
+      }
+    },
+    {
+      "sample": 0,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -2.2830822021484374
+        ],
+        "terminal_profit": [
+          -2.283183215332031
+        ],
+        "information_spent": [
+          3.528
+        ],
+        "volume": [
+          572562
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            196608
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.678225,
+            -0.3448529296875,
+            0.78132021484375,
+            -0.15794970703125,
+            -4.39139482421875,
+            -5.35841865234375,
+            -4.302754296875,
+            -5.168832421875
+          ]
+        ],
+        "elapsed_s": 2.984
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "adaptive",
+      "raw_scores": [
+        0.8795569213867187
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.8795569213867187
+        ],
+        "terminal_profit": [
+          0.8890903442382813
+        ],
+        "information_spent": [
+          0.297
+        ],
+        "volume": [
+          495617
+        ],
+        "purchases": [
+          [
+            61440,
+            61440,
+            73728,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.33431826171875,
+            0.377244921875,
+            1.59471259765625,
+            0.61049677734375,
+            1.1340876953125,
+            0.08173974609375,
+            1.5849380859375,
+            0.31891728515625
+          ]
+        ],
+        "elapsed_s": 3.0859
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "never",
+      "raw_scores": [
+        0.213683251953125
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.213683251953125
+        ],
+        "terminal_profit": [
+          0.220977685546875
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          232796
+        ],
+        "purchases": [
+          [
+            196608,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.99185927734375,
+            -0.13119033203125,
+            0.2290521484375,
+            -0.231473828125,
+            1.005725,
+            -0.15295009765625,
+            0.2372958984375,
+            -0.23885205078125
+          ]
+        ],
+        "elapsed_s": 2.8112
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "periodic",
+      "raw_scores": [
+        0.563247509765625
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.563247509765625
+        ],
+        "terminal_profit": [
+          0.5794883666992188
+        ],
+        "information_spent": [
+          0.273
+        ],
+        "volume": [
+          456854
+        ],
+        "purchases": [
+          [
+            147456,
+            0,
+            49152,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.26043583984375,
+            -0.04914755859375,
+            1.47084580078125,
+            0.3426001953125,
+            0.8757615234375,
+            -0.436359375,
+            1.05792490234375,
+            -0.01608125
+          ]
+        ],
+        "elapsed_s": 2.949
+      }
+    },
+    {
+      "sample": 1,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -2.2829535522460938
+        ],
+        "terminal_profit": [
+          -2.282453759765625
+        ],
+        "information_spent": [
+          3.528
+        ],
+        "volume": [
+          572821
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            196608
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.63708037109375,
+            -0.34865166015625,
+            0.79341552734375,
+            -0.12983623046875,
+            -4.3830869140625,
+            -5.39809208984375,
+            -4.27285458984375,
+            -5.16160283203125
+          ]
+        ],
+        "elapsed_s": 3.0528
+      }
+    },
+    {
+      "sample": 2,
+      "policy": "adaptive",
+      "raw_scores": [
+        0.8807413940429687
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.8807413940429687
+        ],
+        "terminal_profit": [
+          0.8930349487304687
+        ],
+        "information_spent": [
+          0.297
+        ],
+        "volume": [
+          496231
+        ],
+        "purchases": [
+          [
+            61440,
+            61440,
+            73728,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.34954140625,
+            0.402265625,
+            1.5886939453125,
+            0.6328125,
+            1.124716015625,
+            0.08124873046875,
+            1.5867841796875,
+            0.27986875
+          ]
+        ],
+        "elapsed_s": 3.0716
+      }
+    },
+    {
+      "sample": 2,
+      "policy": "never",
+      "raw_scores": [
+        0.21233900146484375
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.21233900146484375
+        ],
+        "terminal_profit": [
+          0.20656124267578124
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          233192
+        ],
+        "purchases": [
+          [
+            196608,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.99146396484375,
+            -0.11872490234375,
+            0.23371064453125,
+            -0.2589015625,
+            1.01035703125,
+            -0.15972626953125,
+            0.23848447265625,
+            -0.2379513671875
+          ]
+        ],
+        "elapsed_s": 2.8088
+      }
+    },
+    {
+      "sample": 2,
+      "policy": "periodic",
+      "raw_scores": [
+        0.5644908447265625
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.5644908447265625
+        ],
+        "terminal_profit": [
+          0.5721903076171875
+        ],
+        "information_spent": [
+          0.273
+        ],
+        "volume": [
+          457878
+        ],
+        "purchases": [
+          [
+            147456,
+            0,
+            49152,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.27068466796875,
+            -0.0266783203125,
+            1.463046484375,
+            0.3785171875,
+            0.87557021484375,
+            -0.45040576171875,
+            1.0621251953125,
+            -0.05693291015625
+          ]
+        ],
+        "elapsed_s": 2.9314
+      }
+    },
+    {
+      "sample": 2,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -2.2794358642578123
+        ],
+        "terminal_profit": [
+          -2.2670615234375
+        ],
+        "information_spent": [
+          3.528
+        ],
+        "volume": [
+          574795
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            196608
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.643701953125,
+            -0.31667587890625,
+            0.78083935546875,
+            -0.10933486328125,
+            -4.3867935546875,
+            -5.38887880859375,
+            -4.2793306640625,
+            -5.179014453125
+          ]
+        ],
+        "elapsed_s": 2.973
+      }
+    },
+    {
+      "sample": 3,
+      "policy": "adaptive",
+      "raw_scores": [
+        0.88398486328125
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.88398486328125
+        ],
+        "terminal_profit": [
+          0.892316015625
+        ],
+        "information_spent": [
+          0.297
+        ],
+        "volume": [
+          496993
+        ],
+        "purchases": [
+          [
+            61440,
+            61440,
+            73728,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.32438369140625,
+            0.4055900390625,
+            1.58789111328125,
+            0.63063681640625,
+            1.137676171875,
+            0.08246748046875,
+            1.60407783203125,
+            0.29915576171875
+          ]
+        ],
+        "elapsed_s": 3.0775
+      }
+    },
+    {
+      "sample": 3,
+      "policy": "never",
+      "raw_scores": [
+        0.2179035888671875
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.2179035888671875
+        ],
+        "terminal_profit": [
+          0.20923077392578124
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          232542
+        ],
+        "purchases": [
+          [
+            196608,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.9915208984375,
+            -0.1316623046875,
+            0.22419375,
+            -0.2382662109375,
+            1.00876513671875,
+            -0.13530068359375,
+            0.2537373046875,
+            -0.2297591796875
+          ]
+        ],
+        "elapsed_s": 2.8201
+      }
+    },
+    {
+      "sample": 3,
+      "policy": "periodic",
+      "raw_scores": [
+        0.5747611083984375
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.5747611083984375
+        ],
+        "terminal_profit": [
+          0.5759521728515625
+        ],
+        "information_spent": [
+          0.273
+        ],
+        "volume": [
+          458873
+        ],
+        "purchases": [
+          [
+            147456,
+            0,
+            49152,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.2424681640625,
+            -0.03412470703125,
+            1.471766796875,
+            0.3833880859375,
+            0.90577470703125,
+            -0.42069375,
+            1.082619140625,
+            -0.0331095703125
+          ]
+        ],
+        "elapsed_s": 2.9474
+      }
+    },
+    {
+      "sample": 3,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -2.2720590087890624
+        ],
+        "terminal_profit": [
+          -2.2710771606445315
+        ],
+        "information_spent": [
+          3.528
+        ],
+        "volume": [
+          575050
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            196608
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.64182509765625,
+            -0.31571787109375,
+            0.79696396484375,
+            -0.1108021484375,
+            -4.37831708984375,
+            -5.38635673828125,
+            -4.2610859375,
+            -5.16298134765625
+          ]
+        ],
+        "elapsed_s": 2.978
+      }
+    },
+    {
+      "sample": 4,
+      "policy": "adaptive",
+      "raw_scores": [
+        0.8772119018554687
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.8772119018554687
+        ],
+        "terminal_profit": [
+          0.8760547729492187
+        ],
+        "information_spent": [
+          0.297
+        ],
+        "volume": [
+          496295
+        ],
+        "purchases": [
+          [
+            61440,
+            61440,
+            73728,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.3297767578125,
+            0.41703681640625,
+            1.570198828125,
+            0.61917998046875,
+            1.1245201171875,
+            0.0761216796875,
+            1.5774037109375,
+            0.30345732421875
+          ]
+        ],
+        "elapsed_s": 3.0558
+      }
+    },
+    {
+      "sample": 4,
+      "policy": "never",
+      "raw_scores": [
+        0.222509326171875
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.222509326171875
+        ],
+        "terminal_profit": [
+          0.2135041259765625
+        ],
+        "information_spent": [
+          0.0
+        ],
+        "volume": [
+          232830
+        ],
+        "purchases": [
+          [
+            196608,
+            0,
+            0,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.00425224609375,
+            -0.13677490234375,
+            0.247536328125,
+            -0.23106943359375,
+            1.009451171875,
+            -0.12736865234375,
+            0.2392671875,
+            -0.2252193359375
+          ]
+        ],
+        "elapsed_s": 2.8324
+      }
+    },
+    {
+      "sample": 4,
+      "policy": "periodic",
+      "raw_scores": [
+        0.5689410034179687
+      ],
+      "winner": 0,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          0.5689410034179687
+        ],
+        "terminal_profit": [
+          0.5667000610351562
+        ],
+        "information_spent": [
+          0.273
+        ],
+        "volume": [
+          457420
+        ],
+        "purchases": [
+          [
+            147456,
+            0,
+            49152,
+            0
+          ]
+        ],
+        "stratum_edge": [
+          [
+            1.274001171875,
+            -0.0265421875,
+            1.4425609375,
+            0.389862109375,
+            0.8748896484375,
+            -0.42793984375,
+            1.04044765625,
+            -0.01575146484375
+          ]
+        ],
+        "elapsed_s": 2.9422
+      }
+    },
+    {
+      "sample": 4,
+      "policy": "always",
+      "raw_scores": [
+        0.0
+      ],
+      "winner": -1,
+      "terminal_reason": "completed",
+      "steps": 196608,
+      "metadata": {
+        "episodes": 8192,
+        "completed_episodes": 8192,
+        "active": [
+          true
+        ],
+        "signed_edge": [
+          -2.2797841796875
+        ],
+        "terminal_profit": [
+          -2.284051953125
+        ],
+        "information_spent": [
+          3.528
+        ],
+        "volume": [
+          574577
+        ],
+        "purchases": [
+          [
+            0,
+            0,
+            0,
+            196608
+          ]
+        ],
+        "stratum_edge": [
+          [
+            0.64846201171875,
+            -0.3132646484375,
+            0.7824494140625,
+            -0.11475,
+            -4.39351572265625,
+            -5.39479716796875,
+            -4.28386416015625,
+            -5.1689931640625
+          ]
+        ],
+        "elapsed_s": 2.9906
+      }
+    }
+  ]
+}

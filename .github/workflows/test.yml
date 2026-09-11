@@ -1,0 +1,24 @@
+name: tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Validate the candidate
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install -r requirements-dev.txt
+          .venv/bin/python -m pytest -q
+          git clone --filter=blob:none https://github.com/macrocosm-os/apex-competitions-builder ../apex-builder
+          git -C ../apex-builder checkout 5a0be85a5975f0948a2d4878597a820c636656e2
+          PYTHONPATH=../apex-builder/src .venv/bin/python -m apex_sdk.dev.cli preflight --spec spec.yaml --input fixtures/input.json
+      - name: Exercise both images and verify records
+        run: |
+          docker build --platform linux/amd64 -f player/Dockerfile -t fixture-player:ci .
+          docker build --platform linux/amd64 -f referee/Dockerfile -t fixture-referee:ci .
+          python3 scripts/docker_match.py --player-image fixture-player:ci --referee-image fixture-referee:ci --submission player/submission.py --episodes 256 --output evidence/ci-smoke
+          python3 scripts/read_records.py evidence/ci-smoke/history/episodes.jsonl.gz
+          python3 -c 'import json; r=json.load(open("evidence/ci-smoke/result.json")); assert r["terminal_reason"] == "completed" and r["raw_scores"][0] > 0'

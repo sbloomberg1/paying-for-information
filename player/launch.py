@@ -1,50 +1,25 @@
-"""hello_world gym_v1 PLAYER server (the image's `entrypoints.evaluate.command`).
-
-A solo eval is a 1-player duel: the miner submission runs here, isolated behind the gym_v1
-HTTP API, and the referee sandbox drives + scores it. The submission never shares a sandbox
-with the scorer.
-
-Contract:
-  - The platform writes the miner submission to target_path (/app/submission.py).
-  - This server exposes /health, /reset, /act (via the toolkit). The referee calls /act once per
-    task with the numbers to sort as the observation; the action is the sorted list.
-"""
-
-from __future__ import annotations
-
 import argparse
 import importlib.util
-from pathlib import Path
-from typing import Any
-
-from gym_v1.player import Player, serve  # vendored; see player/gym_v1/
-
-SUBMISSION_PATH = Path("/app/submission.py")
+import sys
+from gym_v1.player import Player, serve
 
 
-def _load_submission():
-    spec = importlib.util.spec_from_file_location("submission", SUBMISSION_PATH)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)  # type: ignore[union-attr]
-    return module
+class MarketPlayer(Player):
+    def __init__(self):
+        spec = importlib.util.spec_from_file_location("submission", "/app/submission.py")
+        self.module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = self.module
+        spec.loader.exec_module(self.module)
 
+    def reset(self, match_id, player_index, seed, config):
+        self.module.reset(config)
 
-class HelloPlayer(Player):
-    def __init__(self) -> None:
-        # Loading here (at startup) means a broken submission fails readiness -> the referee
-        # forfeits it, exactly like a screening failure.
-        self._submission = _load_submission()
-
-    def reset(self, match_id: str, player_index: int, seed: int, config: dict[str, Any]) -> None:
-        pass  # stateless competition
-
-    def act(self, observation: Any, deadline_ms: int) -> Any:  # noqa: ARG002
-        # observation is the list of numbers to sort; the action is the sorted list.
-        return self._submission.sort_numbers(list(observation))
+    def act(self, observation, deadline_ms):
+        return self.module.act(observation)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
-    serve(HelloPlayer(), port=args.port, readiness_path="/health")
+    serve(MarketPlayer(), port=args.port)
