@@ -28,6 +28,7 @@ def main():
         parser.error("output already contains a result")
     token = "apex-market-" + uuid.uuid4().hex[:10]
     networks, containers = [], []
+    volume = None
     started = time.monotonic()
     common = ["--platform", "linux/amd64", "--cpus", "1", "--memory", "512m", "--pids-limit", "64",
               "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--read-only",
@@ -42,22 +43,25 @@ def main():
                    args.player_image)
             containers.append(name)
             docker("start", name)
+        volume = token + "-data"
+        docker("volume", "create", volume)
         name = token + "-referee"
         config = {"episodes": args.episodes, "batch_size": args.batch_size, "deadline_ms": 100}
         docker("create", *common, "--network", networks[0], "--name", name,
                "--env", "MATCH_ID=local-market", "--env", f"SEED={args.seed}",
                "--env", f"NUM_PLAYERS={len(args.submission)}", "--env", "CONFIG_JSON=" + json.dumps(config),
                "--env", "PLAYER_URLS=" + ",".join(f"http://p{i}:8000" for i in range(len(args.submission))),
-               "--mount", f"type=bind,src={output},dst=/data", args.referee_image)
+               "--mount", f"type=volume,source={volume},target=/data", args.referee_image)
         containers.append(name)
         for network in networks[1:]:
             docker("network", "connect", network, name)
         docker("start", name)
         exit_code = docker("wait", name, timeout=1200).stdout.strip()
+        docker("cp", f"{name}:/data/.", output, check=exit_code == "0")
         logs = docker("logs", name, check=False)
         (output / "referee.log").write_text(logs.stdout + logs.stderr)
         if exit_code != "0":
-            raise RuntimeError(f"referee exit {exit_code}; see {output / 'referee.log'}")
+            raise RuntimeError(f"referee exit {exit_code}: {(logs.stdout + logs.stderr)[-2000:]}")
         result = json.loads((output / "result.json").read_text())
         manifest = {"local_only": True, "architecture": "linux/amd64", "cpu_limit": 1,
                     "memory_bytes": 536870912, "player_count": len(args.submission),
@@ -70,6 +74,8 @@ def main():
     finally:
         for name in reversed(containers):
             docker("rm", "-f", name, check=False)
+        if volume:
+            docker("volume", "rm", volume, check=False)
         for network in reversed(networks):
             docker("network", "rm", network, check=False)
 

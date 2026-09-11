@@ -15,12 +15,12 @@ from market import Episode
 
 class Local:
     def __init__(self, mode="adaptive"):
-        spec = importlib.util.spec_from_file_location("baseline", ROOT / "player/submission.py")
+        path = ROOT / ("benchmarks/overfit.py" if mode == "overfit" else "player/submission.py")
+        spec = importlib.util.spec_from_file_location("baseline", path)
         self.module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = self.module
         spec.loader.exec_module(self.module)
         self.module.MODE = mode
-        if mode == "overfit":
-            self.module.TRAINING = [[e["fair_before"] for e in Episode(0, i, 2).events] for i in range(8192)]
 
     def reset(self, config):
         self.module.reset(config)
