@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: sigstore/cosign-installer@f713795cb21599bc4e5c4b58cbad1da852d7eeb9
         with:
-          cosign-release: v3.0.2
+          cosign-release: v2.5.2
       - name: Build, push, sign, and verify
         shell: bash
         run: |

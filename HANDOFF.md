@@ -1,6 +1,6 @@
 # Competition onboarding manifest: paying_for_information
 
-**Private review candidate 0.1.0 — not released or activated.** This manifest is filled with measured results and explicit outstanding decisions. Send it with the draft in `ONBOARDING_ISSUE.md` after completing the authorized private release. Do not describe placeholder refs as released images.
+**Private review candidate 0.1.1 — not released or activated.** This manifest is filled with measured results and explicit outstanding decisions. Send it with the draft in `ONBOARDING_ISSUE.md` after completing the authorized private release. Do not describe placeholder refs as released images.
 
 ## 1. Goal statement and alignment plan
 

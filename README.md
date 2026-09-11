@@ -1,6 +1,6 @@
 # Paying for Information
 
-Research candidate 0.1.0. Local implementation and evidence are available; this is not an activated Apex competition. See `HANDOFF.md` for the admission status.
+Research candidate 0.1.1. Local implementation and evidence are available; this is not an activated Apex competition. See `HANDOFF.md` for the admission status.
 
 Decide when an observation is worth buying, how precise it should be, and how to quote after seeing it. You compete for flow against a fixed maker that adapts to public news and its inventory.
 

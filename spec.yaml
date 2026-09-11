@@ -1,7 +1,7 @@
 # Release-source spec. Registry digests are filled by the signed release workflow.
 schema: apex.competition.v1
 id: paying_for_information
-version: 0.1.0
+version: 0.1.1
 display_name: Paying for Information
 kind: solo
 process_type: cpu
@@ -50,5 +50,5 @@ referee:
     digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
   timeout_s: 1200
 signature:
-  cosign_identity: https://github.com/sbloomberg1/paying-for-information/.github/workflows/release.yml@refs/tags/v0.1.0
+  cosign_identity: https://github.com/sbloomberg1/paying-for-information/.github/workflows/release.yml@refs/tags/v0.1.1
   cosign_issuer: https://token.actions.githubusercontent.com

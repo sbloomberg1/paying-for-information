@@ -1,4 +1,4 @@
-# Draft: [onboarding] paying_for_information v0.1.0
+# Draft: [onboarding] paying_for_information v0.1.1
 
 **Prepared for review; do not file as an activation request until release fields and open decisions are resolved.**
 
@@ -21,9 +21,9 @@ Proposed worst-case planning budget: 17s startup/reset + 3,072 action calls × 0
 | Form field | Value |
 |---|---|
 | Competition id | `paying_for_information` |
-| Spec version | `0.1.0` candidate |
+| Spec version | `0.1.1` candidate |
 | Competition repo URL | https://github.com/sbloomberg1/paying-for-information (private) |
-| Released git tag | Pending; intended `v0.1.0` after design review |
+| Released git tag | Pending; intended `v0.1.1` after design review |
 | Player image ref | `ghcr.io/sbloomberg1/paying-for-information-player` |
 | Player image digest | Pending signed registry release; local build metadata supplied separately |
 | Referee image digest | Pending signed registry release; local build metadata supplied separately |
