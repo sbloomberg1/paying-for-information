@@ -1,6 +1,6 @@
 # Competition onboarding manifest: paying_for_information
 
-**Private review candidate 0.1.1 — not released or activated.** This manifest is filled with measured results and explicit outstanding decisions. Send it with the draft in `ONBOARDING_ISSUE.md` after completing the authorized private release. Do not describe placeholder refs as released images.
+**Private research prerelease [v0.1.1](https://github.com/sbloomberg1/paying-for-information/releases/tag/v0.1.1) — not activated on Apex.** Signed images and the full evaluation have been verified in GitHub Actions. This manifest is filled with measured results and explicit outstanding decisions. The release assets contain the final spec and handoff; the immutable source tag contains the earlier release-source spec. No onboarding issue has been sent.
 
 ## 1. Goal statement and alignment plan
 
@@ -18,22 +18,35 @@ The ranking score uses trade-time conditional expected surplus; terminal marked 
 
 | Item | Location | Status |
 |---|---|---|
-| Repository and release tag | [https://github.com/sbloomberg1/paying-for-information](https://github.com/sbloomberg1/paying-for-information); template Git history preserved | Private repository created; released tag pending workflow |
-| Competition spec | `spec.yaml` | Schema/input preflight passes; refs and digests remain explicit placeholders |
-| Player image | `evidence/player-build.json`, `evidence/docker-full/run.json` | Built locally; unsigned, not published |
-| Referee image | `evidence/referee-build.json`, `evidence/docker-full/run.json` | Built locally; unsigned, not published |
+| Repository and release tag | [https://github.com/sbloomberg1/paying-for-information](https://github.com/sbloomberg1/paying-for-information); template Git history preserved | [v0.1.1](https://github.com/sbloomberg1/paying-for-information/releases/tag/v0.1.1); private |
+| Competition spec | `spec.yaml` | Final registry digests and exact signing identity; preflight and triage checked |
+| Player image | `spec.yaml`, `evidence/release/player-verification.json` | Published privately, signed by digest, pulled and evaluated |
+| Referee image | `spec.yaml`, `evidence/release/referee-verification.json` | Published privately, signed by digest, pulled and evaluated |
 | Layer 2 screen | None proposed | Rationale in §5.15; Apex review required |
 | Round generation | Platform seed plus referee-owned configuration | No separate `generate_round` needed |
-| Overfit control | `benchmarks/overfit.py`; solo `evidence/solo-20-seeds.json` in sibling primary repo | Implemented; memorizes public training seed 0 |
-| Signing workflow | `.github/workflows/release.yml` | Prepared, immutable action pins; not executed |
+| Overfit control | `benchmarks/overfit.py`; `evidence/solo-20-seeds.json` | Implemented; memorizes public training seed 0 |
+| Signing workflow | `.github/workflows/release.yml` | [Executed successfully](https://github.com/sbloomberg1/paying-for-information/actions/runs/34649869268); both signatures verified |
 | Input schema and fixtures | `referee/config.py`, `input.schema.json`, `fixtures/` | Generated and validated |
 | Positive reference | `player/submission.py` | Full-container score: 1.280184 |
 | Adversarial set | `adversarial/`, `evidence/adversarial-results.json` | Ten fixtures exercised through containers |
 | Records and reader | `/data/history/episodes.jsonl.gz`, `scripts/read_records.py` | 32,768 full-run episodes reconstructed; 83.90 MB compressed |
 | Miner README | `README.md` | Complete for candidate rules |
-| End-to-end evidence | `evidence/docker-full/`, `evidence/REPORT.md` | Local run complete; stage pending |
+| End-to-end evidence | `evidence/docker-full/`, `evidence/REPORT.md` | Local and GitHub released-image runs complete; stage pending |
 
-Pins: `PROVENANCE.json` lists template/builder commits, every Python source hash, and the shared market-engine hash. Python base: `python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea`, built for linux/amd64. No pip dependencies in either runtime image. Model revisions and dataset hashes: n/a, no external model/data; scenarios are generated procedurally. Development dependencies are exact versions in `requirements-dev.txt`. The final spec must use the pushed image digests and verified signing identity from the release workflow, not local IDs or zeros.
+Pins: `PROVENANCE.json` lists template/builder commits, every player/referee Python source hash, and the shared market-engine hash. Python base: `python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea`, built for linux/amd64. No pip dependencies in either runtime image. Model revisions and dataset hashes: n/a, no external model/data; scenarios are generated procedurally. Development dependencies are exact versions in `requirements-dev.txt`. The final `spec.yaml` uses the pushed registry digests and verified signing identity. `evidence/release/verification.json` binds them to the tagged source commit and retains the verification results.
+
+### Verified private release
+
+The [release workflow](https://github.com/sbloomberg1/paying-for-information/actions/runs/34649869268) built both linux/amd64 images from source commit `13db6773955b2a5f92c48e6b974dfc93651e6be3`, signed each digest with keyless Cosign, verified the signatures, pulled both images and ran the full configured evaluation. GitHub runtime: **125.27 seconds** in the referee; **126.72 seconds** for the full loop. All 32,768 replay records reconcile. Every scored and accounting field matches the local full-size result exactly; elapsed time is excluded from that comparison. This was a GitHub-hosted Docker run, not an Apex stage round.
+
+| Image | Signed digest |
+|---|---|
+| Player | `sha256:2d1a5f65e767d80eb38520cc2bdfd040dc124543226d467e8bb01f17856f73d2` |
+| Referee | `sha256:4bc73897dd1d10354bc1bf4bd11f350722faa5b897e7834178af3f9395514250` |
+
+Identity: `https://github.com/sbloomberg1/paying-for-information/.github/workflows/release.yml@refs/tags/v0.1.1`. Issuer: `https://token.actions.githubusercontent.com`. Repository and both container packages were verified private on 11 September 2026. Apex reviewer and private-package access must be arranged before onboarding.
+
+Use the [final spec release asset](https://github.com/sbloomberg1/paying-for-information/releases/download/v0.1.1/spec.yaml) with [input.schema.json](https://github.com/sbloomberg1/paying-for-information/releases/download/v0.1.1/input.schema.json), or the matching files on main. The `v0.1.1` source tag is immutable and contains the pre-build release-source spec; it is not the final deployment manifest. The release review archive contains this completed handoff, final spec, tests, research evidence, signature outputs and the full released-image replay. Source commit and runtime-file hashes are recorded in `PROVENANCE.json`.
 
 ## 3. Proposed operations
 
@@ -119,8 +132,8 @@ Not applicable: both images are CPU-only. No GPU access is requested.
 
 ## 7. Admission sequence and outstanding decisions
 
-1. Owner is `sbloomberg1`; private repositories and their release publishing are authorized. No Apex onboarding issue or message has been sent. The signed release workflow is the next step.
-2. Apex reviews score/goal alignment, the baseline-copy/bootstrap contradiction, private seed entropy, network isolation, record archiving/size and the 100 ms batch budget. The duel additionally needs four-player advancement, signed-score/forfeit handling, close-match rules and coordinated-entry review.
-3. Resolve those decisions; run fresh-seed and stage-hardware checks. The supplied results are sufficient for a concrete design review, not a claim that security/admission review has already occurred.
-4. Push an authorized version tag; the prepared release workflow builds, pushes, signs and verifies real image digests, then creates the final spec artifact. This workflow has not yet been exercised in GitHub Actions. Replace the development spec with the generated release spec and rerun toolkit preflight/triage.
-5. Submit `ONBOARDING_ISSUE.md` plus this manifest and evidence with explicit authorization. Macrocosmos reviews, copies the final spec to its private registry, runs the baseline on stage and determines fee, incentive weight and activation timing. Updates use a new version and signatures.
+1. Private repositories and signed `v0.1.1` review releases are published under `sbloomberg1`. Both released-image evaluations and replay checks passed. The final spec is pinned to actual registry digests; toolkit preflight and onboarding triage were rerun.
+2. Arrange Apex reviewer and package-pull access. No Apex onboarding issue or message has been sent. `ONBOARDING_ISSUE.md` is a concrete draft for that request.
+3. Apex reviews score/goal alignment, the baseline-copy/bootstrap contradiction, private seed entropy, network isolation, record archiving/size and the 100 ms batch budget. The duel additionally needs four-player advancement, signed-score/forfeit handling, close-match rules and coordinated-entry review.
+4. Resolve those decisions; run fresh-seed and stage-hardware checks, including dense record writes and deadline behavior. The supplied results support a concrete design review, not a claim that security/admission review has already occurred.
+5. With authorization, submit the onboarding draft plus this manifest and released artifacts. Macrocosmos reviews, copies the final spec to its private registry, runs the baseline on stage and determines fee, incentive weight and activation timing. Runtime or scoring updates require a new immutable version and signatures.

@@ -1,4 +1,4 @@
-# Release-source spec. Registry digests are filled by the signed release workflow.
+# Generated from a tagged, signed release.
 schema: apex.competition.v1
 id: paying_for_information
 version: 0.1.1
@@ -11,7 +11,7 @@ resources:
   gpu_count: 0
 image:
   ref: ghcr.io/sbloomberg1/paying-for-information-player
-  digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+  digest: sha256:2d1a5f65e767d80eb38520cc2bdfd040dc124543226d467e8bb01f17856f73d2
 submission:
   artifact_type: code
   max_size_mb: 1
@@ -47,7 +47,7 @@ referee:
   protocol: gym_v1
   image:
     ref: ghcr.io/sbloomberg1/paying-for-information-referee
-    digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+    digest: sha256:4bc73897dd1d10354bc1bf4bd11f350722faa5b897e7834178af3f9395514250
   timeout_s: 1200
 signature:
   cosign_identity: https://github.com/sbloomberg1/paying-for-information/.github/workflows/release.yml@refs/tags/v0.1.1

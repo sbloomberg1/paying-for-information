@@ -1,5 +1,5 @@
 {
-  "candidate": "0.1.0",
+  "candidate": "0.1.1",
   "kind": "solo",
   "episodes": 32768,
   "master_seeds_measured": 20,
@@ -15,7 +15,12 @@
     1.2801844177246093
   ],
   "tests": "26 passed",
-  "published": false,
+  "published": true,
   "stage_approved": false,
-  "release_ready": false
+  "release_ready": true,
+  "engine_version": "0.1.0",
+  "activation_ready": false,
+  "release_verification": "release/verification.json",
+  "release_referee_seconds": 125.265,
+  "release_full_loop_seconds": 126.723
 }

@@ -1,0 +1,42 @@
+{
+  "buildx.build.provenance": {
+    "builder": {
+      "id": ""
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/python@3.12-slim?digest=sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea\u0026platform=linux%2Famd64",
+        "digest": {
+          "sha256": "78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "entryPoint": "Dockerfile"
+      },
+      "parameters": {
+        "frontend": "dockerfile.v0",
+        "args": {
+          "label:org.opencontainers.image.source": "https://github.com/sbloomberg1/paying-for-information"
+        },
+        "locals": [
+          {
+            "name": "context"
+          },
+          {
+            "name": "dockerfile"
+          }
+        ]
+      },
+      "environment": {
+        "platform": "linux/amd64"
+      }
+    }
+  },
+  "buildx.build.ref": "default/default/5gevdq1dijvi0flzbfzk5k6wj",
+  "containerimage.config.digest": "sha256:227a7c94bb34ba0d4e4c43ed13e0f6c952ab879edd5c01c626d13a1cdfdd6722",
+  "containerimage.digest": "sha256:2d1a5f65e767d80eb38520cc2bdfd040dc124543226d467e8bb01f17856f73d2",
+  "image.name": "ghcr.io/sbloomberg1/paying-for-information-player:v0.1.1"
+}

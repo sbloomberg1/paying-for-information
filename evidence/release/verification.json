@@ -1,0 +1,41 @@
+{
+  "version": "0.1.1",
+  "release_tag": "v0.1.1",
+  "source_commit": "13db6773955b2a5f92c48e6b974dfc93651e6be3",
+  "repository": "https://github.com/sbloomberg1/paying-for-information",
+  "release_url": "https://github.com/sbloomberg1/paying-for-information/releases/tag/v0.1.1",
+  "workflow_url": "https://github.com/sbloomberg1/paying-for-information/actions/runs/34649869268",
+  "workflow_conclusion": "success",
+  "images": {
+    "player": {
+      "ref": "ghcr.io/sbloomberg1/paying-for-information-player",
+      "digest": "sha256:2d1a5f65e767d80eb38520cc2bdfd040dc124543226d467e8bb01f17856f73d2"
+    },
+    "referee": {
+      "ref": "ghcr.io/sbloomberg1/paying-for-information-referee",
+      "digest": "sha256:4bc73897dd1d10354bc1bf4bd11f350722faa5b897e7834178af3f9395514250"
+    }
+  },
+  "cosign_identity": "https://github.com/sbloomberg1/paying-for-information/.github/workflows/release.yml@refs/tags/v0.1.1",
+  "cosign_issuer": "https://token.actions.githubusercontent.com",
+  "signature_verification": "Both images verified by cosign v2.5.2 in the linked release workflow; raw output retained alongside this file.",
+  "repository_visibility": "PRIVATE",
+  "package_visibility": "PRIVATE",
+  "visibility_checked_utc_date": "2026-09-11",
+  "visibility_evidence": "Repository: authenticated gh repo view. Four package Private badges: authenticated GitHub profile packages page.",
+  "spec_sha256": "ec38074afd44243bee413134ad35eac1ddbf3a0823a45708a8abae3c111290d9",
+  "released_images_run": {
+    "environment": "GitHub-hosted Ubuntu runner; isolated Docker harness, not Apex stage",
+    "episodes": 32768,
+    "referee_seconds": 125.265,
+    "full_loop_seconds": 126.723,
+    "raw_scores": [
+      1.2801844177246093
+    ],
+    "matches_local_result_excluding_elapsed_time": true,
+    "replay_verified": true,
+    "replay_sha256": "1e87eaf25c331e96ea426a11cd5200df4edb9e37799b60acbe3c83e868b41fe9",
+    "replay_compressed_bytes": 83902348
+  },
+  "stage_approved": false
+}

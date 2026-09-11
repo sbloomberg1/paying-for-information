@@ -30,5 +30,23 @@
   "local_build_metadata": [
     "evidence/player-build.json",
     "evidence/referee-build.json"
-  ]
+  ],
+  "competition_version": "0.1.1",
+  "signed_release": {
+    "tag": "v0.1.1",
+    "source_commit": "13db6773955b2a5f92c48e6b974dfc93651e6be3",
+    "workflow_url": "https://github.com/sbloomberg1/paying-for-information/actions/runs/34649869268",
+    "images": {
+      "player": {
+        "ref": "ghcr.io/sbloomberg1/paying-for-information-player",
+        "digest": "sha256:2d1a5f65e767d80eb38520cc2bdfd040dc124543226d467e8bb01f17856f73d2"
+      },
+      "referee": {
+        "ref": "ghcr.io/sbloomberg1/paying-for-information-referee",
+        "digest": "sha256:4bc73897dd1d10354bc1bf4bd11f350722faa5b897e7834178af3f9395514250"
+      }
+    },
+    "cosign_identity": "https://github.com/sbloomberg1/paying-for-information/.github/workflows/release.yml@refs/tags/v0.1.1",
+    "verification": "evidence/release/verification.json"
+  }
 }

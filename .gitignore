@@ -3,4 +3,4 @@ __pycache__/
 .venv/
 evidence/*/history/
 evidence/adversarial/*/history/
-release/
+/release/

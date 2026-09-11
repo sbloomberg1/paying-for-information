@@ -1,6 +1,6 @@
 # Evaluation evidence — paying-for-information
 
-Candidate 0.1.0, measured locally on 11 September 2026. This is a research qualification report, not a stage or production approval.
+Competition prerelease 0.1.1, engine 0.1.0; measured locally and on GitHub on 11 September 2026. This is a research qualification report, not a stage or production approval.
 
 | Check | Result |
 |---|---|
@@ -14,7 +14,7 @@ Candidate 0.1.0, measured locally on 11 September 2026. This is a research quali
 | Reference mean | 1.280819034 |
 | Sample standard deviation | 0.002668041 |
 | Quarter of a 1% margin | 0.003202048 |
-| Release / stage approval | Pending |
+| Release / stage approval | Signed private prerelease complete / stage pending |
 
 The larger evaluation passes the builder’s measured variance rule: sample standard deviation is below one quarter of the 1% takeover margin. This is an estimate from 20 seeds, not a guarantee about future champions. Recheck stronger candidates and paired challenger/incumbent differences before activation. At N=8,192 the same test failed (SD 0.004329 versus target 0.003195), motivating the larger batch.
 
@@ -46,3 +46,9 @@ Stress audit (five seeds, N=8,192, double usual volatility, public noise and inf
 - `../scripts/read_records.py`: replay and score arithmetic verifier.
 
 The numerical reference experiments run trusted strategies in the host process; isolated full-size container runs separately confirm the runtime. Only the recorded configurations and reference policies were timed. The worst-case budget is derived in HANDOFF.md; it has not been validated on Apex stage hardware.
+
+## Signed released-image verification
+
+[GitHub release workflow](https://github.com/sbloomberg1/paying-for-information/actions/runs/34649869268) passed all tests and evaluated the actual signed registry images for 32,768 episodes. Runtime: 125.27s in the referee, 126.72s including the harness lifecycle. Scores and all accounting diagnostics exactly match the local full-size result, excluding elapsed time. All records reconcile. This is a second host and real published images, not an Apex stage run.
+
+`release/verification.json` links source, signed image digests and replay hash. Adjacent files contain both build metadata files, full Cosign verification output, the run/result and record verification. The private release asset `review-package.tar.gz` preserves the full replay under `released-evaluation/history/`. The historical `docker-full` results remain labeled as local images.
